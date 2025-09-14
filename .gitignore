@@ -1,0 +1,6 @@
+static/images/uploads/
+static/images/pred/
+model/
+__pycache__/
+.venv/
+.env

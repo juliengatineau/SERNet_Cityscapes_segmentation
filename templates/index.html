@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Image Prediction</title>
+        <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename='css/styles.css') }}"
+        />
+    </head>
+    <body class="index">
+        <div class="wrapper">
+            <section class="pred-form">
+                <h1><p>Image segmentation</p></h1>
+
+                <ul class="image">
+                    {% for image_name in image_source_names %}
+                    <li id="image-{{ loop.index }}">
+                        <img
+                            src="{{ url_for('serve_image', image_type='source', filename=image_name) }}"
+                            alt="Image"
+                        />
+                    </li>
+                    {% endfor %}
+                </ul>
+
+                <ul class="num_id">
+                    {% for _ in image_source_names %}
+                    <li
+                        id="num-{{ loop.index }}"
+                        onmouseover="highlightImage({{ loop.index }})"
+                        onclick="submitForm({{ loop.index }})"
+                    >
+                        Image {{ loop.index }}
+                    </li>
+                    {% endfor %}
+                </ul>
+
+                <p>
+                    <bold>Hover</bold> an image name to see the image /
+                    <bold>Click</bold> on an image name to select an image for
+                    segmentation
+                </p>
+
+                <p class="file_loader">
+                    <bold>Load a file from drive or url :</bold>
+                </p>
+
+                <form
+                    id="prediction-form"
+                    action="{{ url_for('predict') }}"
+                    method="post"
+                    enctype="multipart/form-data"
+                >
+                    <!-- dataset hidden -->
+                    <input type="hidden" name="image_url" id="image-url" />
+
+                    <!-- user inputs -->
+                    <div class="user-inputs">
+                        <label
+                            >Upload file:
+                            <input
+                                type="file"
+                                name="upload_file"
+                                id="upload-file"
+                                accept="image/*"
+                            />
+                        </label>
+                        <label
+                            >External URL:
+                            <input
+                                type="url"
+                                name="external_url"
+                                id="external-url"
+                                placeholder="https://example.com/image.jpg"
+                            />
+                        </label>
+                        <div class="clear"></div>
+                        <button type="submit">Segment my image</button>
+                    </div>
+                </form>
+            </section>
+
+            <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+        </div>
+    </body>
+</html>

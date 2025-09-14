@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Display Image and Masks</title>
+        <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename='css/styles.css') }}"
+        />
+    </head>
+    <body class="display-page">
+        <div class="wrapper">
+            <section class="display">
+                <h1><p>Segmentation results :</p></h1>
+                <p>source : {{ image_id }}</p>
+
+                <section class="real">
+                    <h2>Input</h2>
+                    <img
+                        src="{{ url_for('serve_image', image_type=image_type, filename=real_image) }}"
+                        alt="Input"
+                    />
+                </section>
+
+                <section class="pred">
+                    <h2>Predicted mask</h2>
+                    <img
+                        src="{{ url_for('serve_image', image_type='pred', filename=predicted_mask) }}"
+                        alt="Predicted Mask"
+                    />
+                </section>
+
+                <section class="overlay">
+                    <h2>
+                        Overlay
+                        <small
+                            >(opacity: <span id="alpha-val">50%</span>)</small
+                        >
+                    </h2>
+
+                    <div class="overlay-box">
+                        <img
+                            class="base-img"
+                            src="{{ url_for('serve_image', image_type=image_type, filename=real_image) }}"
+                            alt="Input"
+                        />
+                        <img
+                            id="mask-img"
+                            class="mask-img"
+                            src="{{ url_for('serve_image', image_type='pred', filename=predicted_mask) }}"
+                            alt="Mask"
+                        />
+                    </div>
+
+                    <input
+                        id="alpha"
+                        type="range"
+                        min="0"
+                        max="100"
+                        value="50"
+                    />
+                </section>
+
+                <div class="clear"></div>
+
+                <h2 class="return">
+                    <a href="{{ url_for('index') }}">Make another prediction</a>
+                </h2>
+            </section>
+        </div>
+        <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+    </body>
+</html>
