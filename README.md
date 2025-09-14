@@ -1,4 +1,4 @@
-# SERNet Cityscapes — Flask Demo with Overlay
+# SERNet Cityscapes segmentation — Flask Demo with Overlay
 
 > Semantic segmentation (**8 classes**) tailored for **urban street scenes** (Cityscapes-style).  
 > Model served from **Hugging Face Hub** with local caching. Flask app includes **upload/URL input** and an **interactive overlay** slider.
@@ -25,7 +25,7 @@
 -   **Model:** `sernet_model.pt` (TorchScript) fetched from HF Hub (auto-cache). You can also bake it into the Docker image.
 -   **Prod:** `gunicorn` + multi-stage Docker (slim).
 
-![frankfurt_000000_000294_leftImg8bit](https://github.com/user-attachments/assets/aa82e1e9-325e-4726-afd5-e503f6407da1)
+![Demo – SERNet overlay](assets/demo_SERNet_cityscapes.png)
 
 ---
 
